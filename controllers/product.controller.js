@@ -182,10 +182,13 @@ export const getProductByCategoryAndSubCategory  = async(request,response)=>{
 
 export const getProductDetails = async(request,response)=>{
     try {
+
         const { productId } = request.body 
+ console.log("product ids", {productId})
 
         const product = await ProductModel.findOne({ _id : productId })
 
+console.log(product)
 
         return response.json({
             message : "product details",
@@ -270,7 +273,7 @@ export const deleteProductDetails = async(request,response)=>{
 export const searchProduct = async(request,response)=>{
     try {
         let { search, page , limit } = request.body 
-
+ console.log({search,page,limit})
         if(!page){
             page = 1
         }
