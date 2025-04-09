@@ -11,6 +11,9 @@ import categoryRoute from './routes/category.route.js';
 import uploadRouter from './routes/upload.router.js';
 import subCategoryRoute from './routes/subCategory.route.js';
 import productRouter from './routes/product.route.js';
+import cartRouter from './routes/cart.router.js';
+import addressRouter from './routes/address.route.js';
+import orderRouter from './routes/order.route.js';
 
 
 dotenv.config();
@@ -56,6 +59,13 @@ app.use(morgan());
 app.use("/api/subcategory",subCategoryRoute)
 
 app.use("/api/product",productRouter)
+
+app.use("/api/cart",cartRouter);
+
+app.use("/api/address",addressRouter);
+
+app.use("/api/order",orderRouter);
+
 // Start Server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
