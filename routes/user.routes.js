@@ -10,7 +10,6 @@ const router = express.Router();
 router.post("/register", registerUserController);
 router.post("/verify-email", verifyEmailController);
 router.post("/login", loginController);
-router.post("/verify-email", verifyEmailController);
 router.post("/refresh-token", refreshToken);
 router.get("/logout", auth,logoutController);
 router.get("/user-details",auth, userDetails);
@@ -20,5 +19,6 @@ router.put('/forgot-password',forgotPasswordController)
 router.put('/verify-forgot-password-otp',verifyForgotPasswordOtp)
 router.put('/reset-password',resetpassword)
 router.delete("/delete-user/:id",auth,deleteUserById)
+
 
 export default router;

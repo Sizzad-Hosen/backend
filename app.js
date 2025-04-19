@@ -51,6 +51,10 @@ app.use(morgan());
 
 
 // Load Routes
+
+
+
+
  app.use('/api/user',userRoutes);
  app.use('/api/category',categoryRoute);
 
