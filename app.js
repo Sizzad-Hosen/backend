@@ -1,9 +1,7 @@
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express from 'express';
-import cors from 'cors';                    // Importing CORS
-import connectdb from "../backend/config/connectDB.js"
-// import userRoutes from './routes/userRoutes.js';  // Importing user routes
+import cors from 'cors';                   
 import morgan from 'morgan';
 import helmet from 'helmet';
 import userRoutes from './routes/user.routes.js';
@@ -14,6 +12,7 @@ import productRouter from './routes/product.route.js';
 import cartRouter from './routes/cart.router.js';
 import addressRouter from './routes/address.route.js';
 import orderRouter from './routes/order.route.js';
+import connectDB from './config/connectDB.js';
 
 
 dotenv.config();
@@ -32,7 +31,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Database Connection
-connectdb(DATABASE_URL);
+connectDB(DATABASE_URL);
 
 // Middleware
 app.use(express.json());

@@ -130,7 +130,7 @@
     "whatwg-url": "^14.1.1"
   },
   "scripts": {
-    "start": "node app",
+    "start": "node app.js",
     "dev": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
