@@ -1,7 +1,8 @@
+import express from 'express';
+
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import express from 'express';
-import cors from 'cors';                   
+import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import userRoutes from './routes/user.routes.js';
@@ -14,20 +15,17 @@ import addressRouter from './routes/address.route.js';
 import orderRouter from './routes/order.route.js';
 import connectDB from './config/connectDB.js';
 
-
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;      // Default port if .env is missing
 const DATABASE_URL = process.env.DATABASE_URL;
 
-// CORS Policy Setup
+// CORS Configuration
 const corsOptions = {
-    origin: 'http://localhost:3000',
-    credentials: true,
-    optionsSuccessStatus: 200,
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+  optionsSuccessStatus: 200,
 };
-
 app.use(cors(corsOptions));
 
 // Database Connection
@@ -35,41 +33,25 @@ connectDB(DATABASE_URL);
 
 // Middleware
 app.use(express.json());
-
 app.use(cookieParser());
-
-// Use Helmet to set secure HTTP headers
-app.use(helmet({
-    crossOriginResourcePolicy: false
-  }));
-  
-
-// Use Morgan for logging HTTP requests
-app.use(morgan());
+app.use(morgan('dev'));
+app.use(helmet());
 
 
 
-// Load Routes
-
-
-
-
- app.use('/api/user',userRoutes);
- app.use('/api/category',categoryRoute);
-
- app.use('/api/file',uploadRouter);
-
-app.use("/api/subcategory",subCategoryRoute)
-
-app.use("/api/product",productRouter)
-
-app.use("/api/cart",cartRouter);
-
-app.use("/api/address",addressRouter);
-
-app.use("/api/order",orderRouter);
-
-// Start Server
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+// Routes
+app.get('/', (req, res) => {
+  res.send('Backend is running');
 });
+
+
+app.use('/api/user', userRoutes);
+app.use('/api/category', categoryRoute);
+app.use('/api/file', uploadRouter);
+app.use('/api/subcategory', subCategoryRoute);
+app.use('/api/product', productRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/address', addressRouter);
+app.use('/api/order', orderRouter);
+
+export default app;

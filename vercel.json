@@ -1,16 +1,16 @@
 {
-    "version" : 2,
-    "name" : "EShop",
-    "builds" : [
-        {
-            "src" : "api/app.js",
-            "use" : "@vercel/node"
-        }
-    ],
-    "routes": [
-        {
-          "src": "/api/(.*)",
-          "dest": "api/app.js"
-        }
-      ]
-}     
+  "version": 2,
+  "name": "EShop",
+  "builds": [
+    {
+      "src": "api/app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/app.js"
+    }
+  ]
+}
