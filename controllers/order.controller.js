@@ -108,7 +108,8 @@ export async function paymentController(request,response){
                 addressId : addressId
             },
             line_items : line_items,
-            success_url : `${process.env.FRONTEND_URL}/success`,
+            success_url : `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+
             cancel_url : `${process.env.FRONTEND_URL}/cancel`
         }
 
