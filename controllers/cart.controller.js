@@ -1,4 +1,5 @@
-import CartProductModel from '../../backend/models/cartProduct.model.js';
+import CartProduct from '../models/cartProduct.model.js';
+
 import UserModel from '../../backend/models/user.model.js';
 
 export const addToCartItemController = async (request, response) => {
@@ -15,7 +16,7 @@ export const addToCartItemController = async (request, response) => {
         }
 
         // Check if item already exists in the cart
-        const checkItemCart = await CartProductModel.findOne({ userId, productId });
+        const checkItemCart = await CartProduct.findOne({ userId, productId });
 
         if (checkItemCart) {
             return response.status(400).json({
