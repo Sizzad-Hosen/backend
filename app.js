@@ -1,10 +1,12 @@
 import express from 'express';
-
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import userRoutes from './routes/user.routes.js';
 import categoryRoute from './routes/category.route.js';
 import uploadRouter from './routes/upload.router.js';
@@ -18,7 +20,8 @@ import connectDB from './config/connectDB.js';
 dotenv.config();
 
 const app = express();
-const DATABASE_URL = process.env.DATABASE_URL;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // CORS Configuration
 const corsOptions = {
@@ -29,7 +32,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Database Connection
-connectDB(DATABASE_URL);
+connectDB(process.env.DATABASE_URL);
 
 // Middleware
 app.use(express.json());
@@ -37,14 +40,7 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(helmet());
 
-
-
 // Routes
-app.get('/', (req, res) => {
-  res.send('Backend is running');
-});
-
-
 app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoute);
 app.use('/api/file', uploadRouter);
@@ -53,5 +49,16 @@ app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/address', addressRouter);
 app.use('/api/order', orderRouter);
+
+// Default Route
+app.get('/', (req, res) => {
+  res.send('Backend is running');
+});
+
+// Static files if needed
+// app.use(express.static(path.join(__dirname, 'public')));
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
 export default app;

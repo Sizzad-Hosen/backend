@@ -1,16 +1,14 @@
 {
   "version": 2,
-  "name": "EShop",
-  "builds": [
-    {
-      "src": "api/app.js",
-      "use": "@vercel/node"
-    }
-  ],
+  "name": "BDShop",
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "api/app.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
