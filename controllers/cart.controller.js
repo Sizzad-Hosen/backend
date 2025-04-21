@@ -56,7 +56,7 @@ export const getCartItemController = async(request,response)=>{
     try {
         const userId = request.userId
 
-        const cartItem =  await CartProductModel.find({
+        const cartItem =  await CartProduct.find({
             userId : userId
         }).populate('productId')
 
@@ -91,7 +91,7 @@ export const updateCartItemQtyController = async (request, response) => {
       }
   
       // Check if the cart item exists before updating
-      const existingCartItem = await CartProductModel.findOne({
+      const existingCartItem = await CartProduct.findOne({
         _id: cartItemId,
         userId,
       });
@@ -105,7 +105,7 @@ export const updateCartItemQtyController = async (request, response) => {
       }
   
       // Update cart item quantity
-      await CartProductModel.updateOne(
+      await CartProduct.updateOne(
         { _id: cartItemId, userId },
         { $set: { quantity } }
       );
@@ -141,7 +141,7 @@ export const updateCartItemQtyController = async (request, response) => {
       }
   
       // Check if the item exists before attempting to delete it
-      const existingCartItem = await CartProductModel.findOne({
+      const existingCartItem = await CartProduct.findOne({
         _id: cartItemId,
         userId,
       });
@@ -155,7 +155,7 @@ export const updateCartItemQtyController = async (request, response) => {
       }
   
       // Delete the cart item
-      await CartProductModel.deleteOne({ _id: cartItemId, userId });
+      await CartProduct.deleteOne({ _id: cartItemId, userId });
   
       return response.json({
         message: "Cart item removed successfully",
