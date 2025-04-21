@@ -27,7 +27,7 @@ export const addToCartItemController = async (request, response) => {
         }
 
         // Add new item to cart
-        const cartItem = new CartProductModel({ quantity: 1, userId, productId });
+        const cartItem = new CartProduct({ quantity: 1, userId, productId });
         const savedCartItem = await cartItem.save();
 
         // Update user shopping cart
