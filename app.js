@@ -50,15 +50,21 @@ app.use('/api/cart', cartRouter);
 app.use('/api/address', addressRouter);
 app.use('/api/order', orderRouter);
 
-// Default Route
-app.get('/', (req, res) => {
-  res.send('Backend is running');
-});
+
+const PORT = process.env.PORT || 5000;
+
+app.get("/",(request,response)=>{
+    ///server to client
+    response.json({
+        message : "Server is running " + PORT
+    })
+})
+
 
 // Static files if needed
 // app.use(express.static(path.join(__dirname, 'public')));
 
-const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
 export default app;
